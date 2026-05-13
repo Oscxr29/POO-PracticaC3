@@ -2,6 +2,10 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 import { User } from "../entities/user.entity";
+import { Category } from "../entities/category.entity";
+import { Product } from "../entities/product.entity";
+import { Order } from "../entities/order.entity";
+import { OrderDetail } from "../entities/order-detail.entity";
 
 dotenv.config();
 
@@ -19,7 +23,7 @@ export class Database {
         this.port = parseInt(process.env.DB_PORT || "5432");
         this.username = process.env.DB_USERNAME || "postgres";
         this.password = process.env.DB_PASSWORD || "postgres";
-        this.database = process.env.DB_NAME || "ecommerce";
+        this.database = process.env.DATABASE || process.env.DB_NAME || "ecommerce";
 
         this.typeormDataSource = new DataSource({
             type: "postgres",
@@ -28,7 +32,7 @@ export class Database {
             username: this.username,
             password: this.password,
             database: this.database,
-            entities: [User],
+            entities: [User, Category, Product, Order, OrderDetail],
             synchronize: false,
         });
     }
