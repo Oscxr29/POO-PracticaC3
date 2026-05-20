@@ -1,6 +1,7 @@
 import express from "express"
 import { initializeDatabase } from "./database/db"
 import userRoutes from "./routes/user.route"
+import categoryRoutes from "./routes/category.route"
 
 const app = express()
 app.use(express.json())
@@ -11,6 +12,7 @@ async function main() {
     console.log("DB conectada")
 
     app.use(userRoutes)
+    app.use(categoryRoutes)
 
     app.listen(3000, () => {
       console.log("Servidor corriendo en http://localhost:3000")
